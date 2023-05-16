@@ -1,0 +1,13 @@
+mongodata/*
+.turbo/*
+dist
+node_modules
+coverage
+**/package.json
+**/tsconfig.**
+configs/*
+dist/*
+test/*
+.env
+
+**/**.spec.**

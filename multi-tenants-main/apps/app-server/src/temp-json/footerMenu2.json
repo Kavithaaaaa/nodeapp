@@ -1,0 +1,20 @@
+{
+  "menus": [
+    {
+      "id": 1,
+      "name": "Terms of Service",
+      "url": "/resume"
+    },
+    {
+      "id": 2,
+      "name": "Privacy Policy",
+      "url": "/interview"
+    },
+    {
+      "id": 3,
+      "name": "Tech Support",
+      "url": "/work-center"
+    }
+
+  ]
+}

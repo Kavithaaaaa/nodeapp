@@ -1,0 +1,9 @@
+{
+  "menus": [
+    {
+      "id": 1,
+      "name": "Clients/Tenants",
+      "url": "/clients"
+    }
+  ]
+}
