@@ -5,7 +5,7 @@ services:
     container_name: app-server
     build:
       context: ./apps/app-server
-      dockerfile: ../../container/Dockerfile.app-server
+      dockerfile: ../../containers/Dockerfile.app-server
       target: development
       args:
         NODE_ENV: 'development'
@@ -35,7 +35,7 @@ services:
     container_name: api-server
     build:
       context: ./apps/api-server
-      dockerfile: ../../container/Dockerfile.api-server
+      dockerfile: ../../containers/Dockerfile.api-server
       target: development
       args:
         NODE_ENV: 'development'
