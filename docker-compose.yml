@@ -16,8 +16,6 @@ services:
     volumes:
       - ./apps/app-server:/usr/src/app
       - /usr/src/app/node_modules/
-    env_file:
-      - ./apps/app-server/.env
     ports:
       - ${APP_PORT:-3010}:${APP_PORT:-3010}
     command: npm run dev
@@ -46,12 +44,10 @@ services:
         BASE_IMAGE: node:16.15-buster-slim
     environment:
       NODE_ENV: 'development'
-      PORT: ${API_PORT:-3050}
+      PORT: ${API_PORT:-3020}
     volumes:
       - ./apps/api-server:/usr/src/app
       - /usr/src/app/node_modules/
-    env_file:
-      - ./apps/api-server/.env
     ports:
       - ${API_PORT:-3020}:${API_PORT:-3020}
     command: npm run start:debug
