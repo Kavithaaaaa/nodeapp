@@ -29,11 +29,6 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -45,16 +40,22 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        IMAGE_TAG: latest
+        IMAGE_TAG: ${{ github.sha }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker-compose up -d --build  multitenant .
-        docker tag multitenant:$IMAGE_TAG 821125916187.dkr.ecr.us-east-2.amazonaws.com/multitenant:latest
-        docker push 821125916187.dkr.ecr.us-east-2.amazonaws.com/multitenant:latest
+        docker-compose up -d --build  $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
