@@ -24,8 +24,6 @@ services:
   mongodb-service:
     container_name: mongodb-service
     image: mongo:5.0
-    env_file:
-      - ./apps/api-server/.env
     ports:
       - 27017:27017
     environment:
