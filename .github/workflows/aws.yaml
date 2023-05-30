@@ -12,9 +12,10 @@
 
 name: Deploy to Amazon ECR
 
+
 on:
-  push:
-    branches: [ "main" ]
+  repository_dispatch:
+    types: do-something      
 
 env:
   ECR_REPOSITORY: 821125916187.dkr.ecr.us-east-2.amazonaws.com/multitenant          # set this to your Amazon ECR repository name
