@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  api-tenant-server:
+    container_name: api-tenant-server
+    image: 433474711752.dkr.ecr.us-east-2.amazonaws.com/multitenant:api-v1
+    build:
+      context: ./apps/api-server
+      dockerfile: ../../containers/Dockerfile.api-server.prod
+      target: production
+      args:
+        NODE_ENV: 'production'
+        BASE_IMAGE: node:16.15-buster-slim
+    environment:
+      NODE_ENV: 'production'
+      PORT: 3020
+    
+   
+    #command: npm run start:prod
+    #restart: always
+
+  app-tenant-server:
+    container_name: app-tenant-server
+    image: 433474711752.dkr.ecr.us-east-2.amazonaws.com/multitenant:client-v1
+    build:
+      context: ./apps/app-server
+      dockerfile: ../../containers/Dockerfile.app-server.prod
+      args:
+        NODE_ENV: 'production'
+        BASE_IMAGE: node:16.15-buster-slim
+    environment:
+      NODE_ENV: 'production'
+      PORT: 3010
+    
+    restart: always
+
+networks:
+  default:
+      name: server_backend

@@ -16,6 +16,8 @@ services:
     volumes:
       - ./apps/app-server:/usr/src/app
       - /usr/src/app/node_modules/
+    env_file:
+      - ./apps/app-server/.env
     ports:
       - ${APP_PORT:-3010}:${APP_PORT:-3010}
     command: npm run build
@@ -24,6 +26,8 @@ services:
   mongodb-service:
     container_name: mongodb-service
     image: mongo:5.0
+    env_file:
+      - ./apps/api-server/.env
     ports:
       - 27017:27017
     environment:
@@ -46,6 +50,8 @@ services:
     volumes:
       - ./apps/api-server:/usr/src/app
       - /usr/src/app/node_modules/
+    env_file:
+      - ./apps/api-server/.env
     ports:
       - ${API_PORT:-3020}:${API_PORT:-3020}
     command: npm run start:prod
